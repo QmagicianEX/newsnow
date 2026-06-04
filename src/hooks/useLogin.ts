@@ -29,7 +29,8 @@ export function useLogin() {
   const enableLogin = useAtomValue(enableLoginAtom)
 
   const login = useCallback(() => {
-    window.location.href = enableLogin.url || "/api/login"
+    // 登录跳转地址需带上部署前缀（如 /newsnow/api/login），__API_BASE_URL__ 由 vite 构建时注入
+    window.location.href = enableLogin.url || `${__API_BASE_URL__}/login`
   }, [enableLogin])
 
   const logout = useCallback(() => {
