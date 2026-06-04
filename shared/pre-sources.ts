@@ -13,17 +13,6 @@ const Time = {
 }
 
 export const originSources = {
-  "v2ex": {
-    name: "V2EX",
-    color: "slate",
-    home: "https://v2ex.com/",
-    sub: {
-      share: {
-        title: "最新分享",
-        column: "tech",
-      },
-    },
-  },
   "zhihu": {
     name: "知乎",
     type: "hottest",
@@ -259,13 +248,6 @@ export const originSources = {
     home: "https://solidot.org",
     interval: Time.Slow,
   },
-  "hackernews": {
-    name: "Hacker News",
-    color: "orange",
-    column: "tech",
-    type: "hottest",
-    home: "https://news.ycombinator.com/",
-  },
   "producthunt": {
     name: "Product Hunt",
     color: "red",
@@ -452,14 +434,6 @@ export const originSources = {
         home: "https://news.qq.com/tag/aEWqxLtdgmQ=",
       },
     },
-  },
-  "freebuf": {
-    name: "Freebuf",
-    column: "china",
-    title: "网络安全",
-    color: "green",
-    type: "hottest",
-    home: "https://www.freebuf.com/",
   },
 
   "qqvideo": {
