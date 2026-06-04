@@ -16,7 +16,6 @@ const OVERSEAS_HOSTS = [
   "linux.do",
   "sputniknews.cn",
   "chinese.aljazeera.net",
-  "www.zaobao.com",
 ]
 
 /**
