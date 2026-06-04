@@ -217,8 +217,8 @@ update_project() {
     exit 1
   fi
 
-  log "热重载 PM2 进程..."
-  pm2 reload "$APP_NAME" --update-env
+  log "启动/热重载 PM2 进程..."
+  pm2 startOrReload "$PM2_CONFIG" --update-env
 
   log "更新完成 ✅"
 }
