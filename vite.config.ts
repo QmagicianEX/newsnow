@@ -15,6 +15,10 @@ dotenv.config({
 
 export default defineConfig({
   base: process.env.BASE_PATH || "/",
+  // 把 BASE_PATH 注入到客户端代码，供前端 API 请求拼接路径前缀
+  define: {
+    __BASE_PATH__: JSON.stringify(process.env.BASE_PATH || "/"),
+  },
   resolve: {
     alias: {
       "~": join(projectDir, "src"),

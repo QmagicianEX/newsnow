@@ -37,10 +37,16 @@ export class Timer {
   }
 }
 
+// __BASE_PATH__ 由 vite.config.ts 通过 define 注入，部署到子路径时（如 /newsnow/）会包含前缀
+declare const __BASE_PATH__: string
+
+// 将 BASE_PATH 与 /api 拼接，去掉可能存在的多余斜杠，保证最终形如 "/newsnow/api"
+const apiBase = `${__BASE_PATH__.replace(/\/$/, "")}/api`
+
 export const myFetch = $fetch.create({
   timeout: 15000,
   retry: 0,
-  baseURL: `${import.meta.env.VITE_BASE_PATH || import.meta.env.BASE_PATH || ""}/api`,
+  baseURL: apiBase,
 })
 
 export function isiOS() {
