@@ -133,6 +133,17 @@ build_project() {
   log "安装依赖（含 native 模块编译，耗时较久）..."
   pnpm install
 
+  # 在构建前 source .env.server 并 export 关键变量，确保 Vite 子进程能读到
+  # 这样即使 dotenv 加载失败，BASE_PATH 也能通过 shell 环境正确传递
+  if [ -f "$ENV_FILE" ]; then
+    log "加载 $ENV_FILE 中的环境变量供构建使用..."
+    set -a
+    # shellcheck disable=SC1090
+    source "$ENV_FILE"
+    set +a
+    log "构建期 BASE_PATH=${BASE_PATH:-未设置}"
+  fi
+
   log "构建生产包..."
   pnpm run build
 
@@ -209,6 +220,16 @@ update_project() {
 
   log "同步依赖..."
   pnpm install
+
+  # 在构建前加载 .env.server 并 export，确保 BASE_PATH 等变量传到 Vite 构建子进程
+  if [ -f "$ENV_FILE" ]; then
+    log "加载 $ENV_FILE 中的环境变量供构建使用..."
+    set -a
+    # shellcheck disable=SC1090
+    source "$ENV_FILE"
+    set +a
+    log "构建期 BASE_PATH=${BASE_PATH:-未设置}"
+  fi
 
   log "重新构建..."
   pnpm run build
