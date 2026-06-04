@@ -16,14 +16,16 @@ dotenv.config({
 // 解析部署路径前缀：优先读取 BASE_PATH 环境变量，默认根路径
 // 用于：1) Vite base 控制静态资源前缀  2) define 注入客户端代码用于 API baseURL
 const BASE_PATH = process.env.BASE_PATH || "/"
+// 预先计算 API baseURL 完整字符串，避免运行时拼接被构建工具改写
+const API_BASE_URL = `${BASE_PATH.replace(/\/$/, "")}/api`
 // eslint-disable-next-line no-console
-console.log(`[vite.config] BASE_PATH = ${BASE_PATH}`)
+console.log(`[vite.config] BASE_PATH = ${BASE_PATH}, API_BASE_URL = ${API_BASE_URL}`)
 
 export default defineConfig({
   base: BASE_PATH,
-  // 把 BASE_PATH 注入到客户端代码，供前端 API 请求拼接路径前缀
+  // 把 API_BASE_URL 注入到客户端代码，供前端 API 请求拼接路径前缀
   define: {
-    __BASE_PATH__: JSON.stringify(BASE_PATH),
+    __API_BASE_URL__: JSON.stringify(API_BASE_URL),
   },
   resolve: {
     alias: {

@@ -37,15 +37,14 @@ export class Timer {
   }
 }
 
-// 使用 Vite 内置的 import.meta.env.BASE_URL，自动取自 vite.config.ts 中的 base 配置
-// 部署到子路径（如 /newsnow/）时该值即为 "/newsnow/"，根路径部署时为 "/"
-// 拼接后形如 "/newsnow/api" 或 "/api"
-const apiBase = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/api`
+// __API_BASE_URL__ 由 vite.config.ts 通过 define 在构建时替换为字符串字面量
+// 例如部署到子路径 /newsnow/ 时，会被替换为 "/newsnow/api"；根路径部署则为 "/api"
+declare const __API_BASE_URL__: string
 
 export const myFetch = $fetch.create({
   timeout: 15000,
   retry: 0,
-  baseURL: apiBase,
+  baseURL: __API_BASE_URL__,
 })
 
 export function isiOS() {
