@@ -28,9 +28,11 @@ module.exports = {
       // 启动脚本：Nitro 构建后的 Node 服务入口（使用绝对路径，避免 cwd 异常时找不到）
       script: path.join(APP_DIR, "dist/output/server/index.mjs"),
 
-      // 传递给 Node 的参数：使用 Node 24 内置的 --env-file 加载环境变量文件
-      // 使用绝对路径，避免 PM2 启动时 cwd 不一致导致找不到 .env.server
-      node_args: `--env-file=${path.join(APP_DIR, ".env.server")}`,
+      // 传递给 Node 的参数：
+      // 1) --env-file 加载 .env.server 中的环境变量（Node 24 原生支持）
+      // 2) --use-env-proxy 让 undici/fetch 自动识别 HTTP_PROXY / HTTPS_PROXY 环境变量
+      //    用于服务器需要通过代理访问国外新闻源（如 V2EX、GitHub）的场景
+      node_args: `--env-file=${path.join(APP_DIR, ".env.server")} --use-env-proxy`,
 
       // 工作目录
       cwd: APP_DIR,
