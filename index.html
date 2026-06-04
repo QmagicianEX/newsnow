@@ -40,12 +40,26 @@
   </script>
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EL9HHYE5LC"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E5BVTTKDH1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-EL9HHYE5LC');
+    gtag('config', 'G-E5BVTTKDH1', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+  </script>
+
+  <!-- 百度统计 -->
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ed8eeb6065f00663128c3959302a8f6a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
   </script>
 
   <script>
